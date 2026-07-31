@@ -46,13 +46,21 @@ I reproduced the issue by tracing `api/routes/health.py` against `core/config.py
 
 **PR link:** [add submitted PR link]
 
+<<<<<<< HEAD
 **Branch:** [add branch name, e.g. `fix/155-health-check-settings-mismatch`]
+=======
+**Branch:** `fix/155-health-check-settings-mismatch`
+>>>>>>> fix/155-health-check-settings-mismatch
 
 **What you built:**
 Updated the health check implementation so Redis validation uses the configured `redis_url` field from project settings rather than non-existent host/port attributes. This restores correct health reporting behavior and prevents false unhealthy responses caused by configuration mismatch.
 
 **Tests added or updated:**
+<<<<<<< HEAD
 - `tests/unit/api/routes/test_health.py` (updated Redis health-path coverage for success/failure behavior)
+=======
+- `tests/unit/test_health_route.py` — 2 tests: `test_health_check_returns_healthy_when_dependencies_pass`, `test_health_check_raises_503_when_redis_fails` (both pass)
+>>>>>>> fix/155-health-check-settings-mismatch
 
 **Self-review confirmation:** [ ] make check passes  [ ] make test-unit passes
 
