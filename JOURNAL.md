@@ -22,3 +22,43 @@ I reproduced the issue by tracing `api/routes/health.py` against `core/config.py
 **Blockers or open questions:**
 - Need to verify whether any integration tests rely on the old Redis host/port behavior.
 - Full-repo checks include unrelated baseline failures that should be called out separately from this issue scope.
+
+## Week 9 — Solution building & PR submission
+
+### Check-in 1 (mid-week)
+
+**Current progress:**
+- Implemented the health check fix by aligning Redis configuration usage with `Settings.redis_url`.
+- Added/updated health endpoint tests to validate healthy and degraded behavior with Redis checks.
+- Confirmed Week 8 reproduction and plan artifacts are committed and traceable from this branch.
+
+**Next steps:**
+- Run `make check` and `make test-unit` again on this branch and compare against any baseline failures.
+- Open or update the draft PR, request peer/mentor feedback, and address review comments.
+- Complete Check-in 2 with final PR link, branch URL, and final test/status confirmation.
+
+**Blockers:**
+- None currently.
+
+---
+
+### Check-in 2 (end of week)
+
+**PR link:** [add submitted PR link]
+
+**Branch:** [add branch name, e.g. `fix/155-health-check-settings-mismatch`]
+
+**What you built:**
+Updated the health check implementation so Redis validation uses the configured `redis_url` field from project settings rather than non-existent host/port attributes. This restores correct health reporting behavior and prevents false unhealthy responses caused by configuration mismatch.
+
+**Tests added or updated:**
+- `tests/unit/api/routes/test_health.py` (updated Redis health-path coverage for success/failure behavior)
+
+**Self-review confirmation:** [ ] make check passes  [ ] make test-unit passes
+
+**Validation notes (2026-07-30):**
+- `make check` currently fails due to pre-existing lint findings (182 total; includes Ruff B904 cases such as `agent/error_handling.py`).
+- `make test-unit` currently fails with pre-existing unit-test failures (53 failed, 377 passed).
+- I will confirm my changes introduce no new failures relative to this baseline in the final PR description.
+
+**Draft PR feedback received from:** [name or Slack handle, or "none"]
